@@ -19,20 +19,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <properties>
-    <version.solr>4.4.0</version.solr>
+    <version.solr>4.10.2</version.solr>
     <version.guava>11.0.2</version.guava>
     <version.joda-time>1.6</version.joda-time>
     <version.slf4j>1.7.5</version.slf4j>
-    <version.hbase94>0.94.6-cdh4.4.0</version.hbase94>
-    <version.hbase96>0.96.1.1-cdh5.0.0</version.hbase96>
-    <version.hbase98>0.98.6-cdh5.2.0-SNAPSHOT</version.hbase98>
-    <version.hadoop.hbase96>2.3.0-cdh5.0.0</version.hadoop.hbase96>
-    <version.hadoop.hbase98>2.5.0-cdh5.2.0-SNAPSHOT</version.hadoop.hbase98>
+    <version.hbase98>0.98.7-hadoop2</version.hbase98>
+    <version.hadoop.hbase98>2.5.1</version.hadoop.hbase98>
     <version.hadoop.mr1>2.0.0-mr1-cdh4.4.0</version.hadoop.mr1>
-    <version.hadoop.mr1.hbase96>2.3.0-mr1-cdh5.0.0</version.hadoop.mr1.hbase96>
     <version.hadoop.mr1.hbase98>2.5.0-mr1-cdh5.2.0-SNAPSHOT</version.hadoop.mr1.hbase98>
-    <version.hadoop>2.0.0-cdh4.4.0</version.hadoop>
-    <version.zookeeper>3.4.5-cdh4.4.0</version.zookeeper>
+    <version.hadoop>2.5.1</version.hadoop>
+    <version.zookeeper>3.4.6</version.zookeeper>
     <version.jackson>1.8.8</version.jackson>
     <version.httpclient>4.2.5</version.httpclient>
     <version.kite>0.13.0</version.kite>
@@ -432,160 +428,6 @@
   </dependencyManagement>
 
   <profiles>
-    <profile>
-      <id>0.94</id>
-      <activation>
-        <property>
-          <name>!hbase.api</name>
-        </property>
-      </activation>
-
-      <dependencyManagement>
-        <dependencies>
-          <dependency>
-            <groupId>com.ngdata</groupId>
-            <artifactId>hbase-sep-impl</artifactId>
-            <version>1.6-hbase0.94-SNAPSHOT</version>
-          </dependency>
-
-          <!-- We have to explicitly manage Hadoop dependencies here, since they are optional in HBase -->
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-test</artifactId>
-            <version>${version.hadoop.mr1}</version>
-            <scope>test</scope>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-common</artifactId>
-            <version>${version.hadoop}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-common</artifactId>
-            <version>${version.hadoop}</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-hdfs</artifactId>
-            <version>${version.hadoop}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-hdfs</artifactId>
-            <version>${version.hadoop}</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
-            <version>${version.hadoop.mr1}</version>
-          </dependency>
-        </dependencies>
-      </dependencyManagement>
-
-      <dependencies>
-        <dependency>
-          <groupId>org.apache.hbase</groupId>
-          <artifactId>hbase</artifactId>
-        </dependency>
-
-        <dependency>
-          <groupId>org.apache.hbase</groupId>
-          <artifactId>hbase</artifactId>
-          <type>test-jar</type>
-          <scope>test</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-
-    <profile>
-      <id>0.96</id>
-      <activation>
-        <property>
-          <name>hbase.api</name>
-          <value>0.96</value>
-        </property>
-      </activation>
-
-      <dependencyManagement>
-        <dependencies>
-          <dependency>
-            <groupId>com.ngdata</groupId>
-            <artifactId>hbase-sep-impl</artifactId>
-            <version>1.6-hbase0.96-SNAPSHOT</version>
-          </dependency>
-
-          <!-- We have to explicitly manage Hadoop dependencies here, since they are optional in HBase -->
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-test</artifactId>
-            <version>${version.hadoop.mr1.hbase96}</version>
-            <scope>test</scope>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-common</artifactId>
-            <version>${version.hadoop.hbase96}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-common</artifactId>
-            <version>${version.hadoop.hbase96}</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-hdfs</artifactId>
-            <version>${version.hadoop.hbase96}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-hdfs</artifactId>
-            <version>${version.hadoop.hbase96}</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-minicluster</artifactId>
-            <version>${version.hadoop.hbase96}</version>
-            <scope>test</scope>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
-            <version>${version.hadoop.mr1.hbase96}</version>
-          </dependency>
-        </dependencies>
-      </dependencyManagement>
-
-      <dependencies>
-        <dependency>
-          <groupId>org.apache.hbase</groupId>
-          <artifactId>hbase-server</artifactId>
-        </dependency>
-
-        <dependency>
-          <groupId>org.apache.hbase</groupId>
-          <artifactId>hbase-client</artifactId>
-          <type>test-jar</type>
-          <scope>test</scope>
-        </dependency>
-
-        <dependency>
-          <groupId>org.apache.hbase</groupId>
-          <artifactId>hbase-common</artifactId>
-          <type>test-jar</type>
-          <scope>test</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-
     <profile>
       <id>0.98</id>
       <activation>
