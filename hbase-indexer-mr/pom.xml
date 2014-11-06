@@ -45,7 +45,7 @@
         <exclusion>
           <!-- CDH-16644: no need for startReportingMetricsToHTTP command from kite-morphlines-metrics-servlets -->
           <groupId>org.eclipse.jetty</groupId>
-          <artifactId>jetty-servlet</artifactId> 
+          <artifactId>jetty-servlet</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -96,7 +96,7 @@
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-servlet</artifactId>
-    </dependency>    
+    </dependency>
   </dependencies>
 
   <profiles>
@@ -106,7 +106,7 @@
         <hadoop.version>${version.hadoop.hbase98}</hadoop.version>
       </properties>
     </profile>
-    
+
     <profile>
       <id>0.94</id>
       <activation>
@@ -208,9 +208,9 @@
           <scope>test</scope>
         </dependency>
 
-      </dependencies>  
+      </dependencies>
     </profile>
-    
+
     <profile>
       <id>0.98</id>
       <activation>
@@ -259,7 +259,7 @@
           <scope>test</scope>
           <version>${version.hbase98}</version>
         </dependency>
-      </dependencies>  
+      </dependencies>
     </profile>
   </profiles>
 
@@ -278,7 +278,7 @@
           </systemPropertyVariables>
         </configuration>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -292,6 +292,9 @@
               <mainClass>com.ngdata.hbaseindexer.mr.HBaseMapReduceIndexerTool</mainClass>
             </manifest>
           </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
         </configuration>
         <executions>
           <execution>
